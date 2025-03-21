@@ -43,3 +43,8 @@ server.listen(PORT, () => {
   console.log("Server is running on PORT:" + PORT);
   connectDB();
 });
+
+// Root route to show backend is running
+app.get("/", (req, res) => {
+  res.send("Backend is running");
+});
