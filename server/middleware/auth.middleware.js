@@ -6,8 +6,10 @@ export const protectRoute = async (req, res, next) => {
     const token = req.cookies.jwt || req.headers.authorization?.split(" ")[1] || req.body.token;
 
     if (!token) {
-      return res.status(401).json({ message: "Unauthorized - No Token Provided" });
+      return res.status(401).json({ message: "Unauthorized - No Token Provided (in middleware)" });
     }
+
+    console.log("Token found in middleware: ", token);
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
