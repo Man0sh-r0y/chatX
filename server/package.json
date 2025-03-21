@@ -5,8 +5,8 @@
   "main": "server.js",
   "scripts": {
     "dev": "nodemon server.js",
-    "build": "npm install && cd .. && npm install && npm run build",
-    "start": "concurrently \"npm run dev\" \"cd .. && npm run dev\""
+    "build": "npm install",
+    "start": "npm run dev"
   },
   "keywords": [],
   "author": "",
