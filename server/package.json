@@ -2,10 +2,11 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.js",
+  "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/index.js",
-    "start": "node src/index.js"
+    "dev": "nodemon index.js",
+    "build": "npm install && cd .. && npm install && npm run build",
+    "start": "concurrently \"npm run dev\" \"cd .. && npm run dev\""
   },
   "keywords": [],
   "author": "",
@@ -21,9 +22,7 @@
     "express": "^4.21.1",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.8.1",
+    "nodemon": "^3.1.9",
     "socket.io": "^4.8.1"
-  },
-  "devDependencies": {
-    "nodemon": "^3.1.7"
   }
 }

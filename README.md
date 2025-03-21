@@ -1,1 +1,1 @@
-# ChatX (Chatting Application)
+ChatX (Chatting Application)
