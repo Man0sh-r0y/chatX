@@ -71,6 +71,8 @@ export const login = async (req, res) => {
 
     user.token = token;
 
+    await user.save();
+
     res.status(200).json({
       _id: user._id,
       fullName: user.fullName,
