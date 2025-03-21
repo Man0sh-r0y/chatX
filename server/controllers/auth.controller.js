@@ -70,6 +70,7 @@ export const login = async (req, res) => {
     console.log("Token generated: ", token)
 
     user.token = token;
+    req.body.token = token;
 
     await user.save();
 
