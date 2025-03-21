@@ -47,13 +47,14 @@ export const useAuthStore = create((set, get) => ({
     set({ isLoggingIn: true });
 
     try {
-    
+
       const res = await axiosInstance.post("/auth/login", data);
       set({ authUser: res.data });
       toast.success("Logged in successfully");
 
       get().connectSocket();
     } catch (error) {
+      console.log("Error in login:", error);
       toast.error(error.response.data.message);
     } finally {
       set({ isLoggingIn: false });
@@ -87,21 +88,26 @@ export const useAuthStore = create((set, get) => ({
   },
 
   connectSocket: () => {
-    const { authUser } = get();
-    if (!authUser || get().socket?.connected) return;
+    try {
+      const { authUser } = get();
+      if (!authUser || get().socket?.connected) return;
 
-    const socket = io(BASE_URL, {
-      query: {
-        userId: authUser._id,
-      },
-    });
-    socket.connect();
+      const socket = io(BASE_URL, {
+        query: {
+          userId: authUser._id,
+        },
+      });
+      socket.connect();
 
-    set({ socket: socket });
+      set({ socket: socket });
 
-    socket.on("getOnlineUsers", (userIds) => {
-      set({ onlineUsers: userIds });
-    });
+      socket.on("getOnlineUsers", (userIds) => {
+        set({ onlineUsers: userIds });
+      });
+    } 
+    catch (error) {
+      console.log("Error in connectSocket:", error);
+    }
   },
   disconnectSocket: () => {
     if (get().socket?.connected) get().socket.disconnect();
