@@ -3,7 +3,9 @@ import User from "../models/user.model.js";
 
 export const protectRoute = async (req, res, next) => {
   try {
-    const token = req.cookies.jwt || req.headers.authorization?.split(" ")[1] || req.body.token;
+
+    console.log("Req body: ", req.body)
+    const token = req.cookies.jwt || req.body.token;
 
     if (!token) {
       return res.status(401).json({ message: "Unauthorized - No Token Provided (in middleware)" });
