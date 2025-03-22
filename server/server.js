@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 
-import path from "path";
+// import path from "path";
 
 import { connectDB } from "./lib/db.js";
 
@@ -14,13 +14,13 @@ import { app, server } from "./lib/socket.js";
 dotenv.config();
 
 const PORT = process.env.PORT;
-const __dirname = path.resolve();
+// const __dirname = path.resolve();
 
 app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "https://chatappbymanash.vercel.app",
     credentials: true,
   })
 );
@@ -30,13 +30,13 @@ app.use("/api/messages", messageRoutes);
 
 // --------------- production code --------------
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../build")));
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static(path.join(__dirname, "../dist")));
 
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../", "build", "index.html"));
-  });
-}
+//   app.get("*", (req, res) => {
+//     res.sendFile(path.join(__dirname, "../", "dist", "index.html"));
+//   });
+// }
 
 // ------------------------------------------
 server.listen(PORT, () => {
@@ -45,6 +45,6 @@ server.listen(PORT, () => {
 });
 
 // Root route to show backend is running
-// app.get("/", (req, res) => {
-//   res.send("Backend is running");
-// });
+app.get("/", (req, res) => {
+  res.send("Backend is running");
+});
