@@ -4,6 +4,10 @@ import { axiosInstance } from "../lib/axios";
 import { useAuthStore } from "./useAuthStore";
 import axios from "axios";
 
+const baseURL = "https://chatx-f80m.onrender.com/api";
+
+const token = useAuthStore.getState().token;
+
 export const useChatStore = create((set, get) => ({
   messages: [],
   users: [],
@@ -14,24 +18,13 @@ export const useChatStore = create((set, get) => ({
   getUsers: async () => {
     set({ isUsersLoading: true });
 
-    const token = useAuthStore.getState().token;
-
     if(token) console.log("token found while fetching user details (in frontend): ", token);
     else console.log("No token found while fetching user details (in frontend)");
 
-    // const options = {
-    //   method: "get",
-    //   url: "https://chatx-f80m.onrender.com/api",
-    //   headers: token ? {Authorization: `Bearer ${token}`} : null,
-    //   params: "/messages/users",
-    // }
-
     try {
       // const res = await axiosInstance.get("/messages/users");
-      const res = await axios.get("https://chatx-f80m.onrender.com/api/messages/users", {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
+      const res = await axios.get(`${baseURL}/messages/users`, {
+        headers: { Authorization: `Bearer ${token}`}
       })
 
       console.log("Token: ", token);
@@ -52,7 +45,10 @@ export const useChatStore = create((set, get) => ({
   getMessages: async (userId) => {
     set({ isMessagesLoading: true });
     try {
-      const res = await axiosInstance.get(`/messages/${userId}`);
+      //const res = await axiosInstance.get(`/messages/${userId}`);
+      const res = await axios.get(`${baseURL}/messages/${userId}`,{
+        headers: { Authorization: `Bearer ${token}`}
+      });
       set({ messages: res.data });
     } catch (error) {
       toast.error(error.response.data.message);
@@ -63,7 +59,13 @@ export const useChatStore = create((set, get) => ({
   sendMessage: async (messageData) => {
     const { selectedUser, messages } = get();
     try {
-      const res = await axiosInstance.post(`/messages/send/${selectedUser._id}`, messageData);
+      // const res = await axiosInstance.post(`/messages/send/${selectedUser._id}`, messageData);
+
+      const res = await axios.post(`${baseURL}/messages/send/${selectedUser._id}`, messageData, {
+        headers: { Authorization: `Bearer ${token}`},
+        'Content-Type': 'application/json'
+      });
+
       set({ messages: [...messages, res.data] });
     } catch (error) {
       toast.error(error.response.data.message);
