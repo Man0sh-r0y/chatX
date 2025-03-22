@@ -32,3 +32,5 @@ export const THEMES = [
   "nord",
   "sunset",
 ];
+
+export const baseURL = "https://chatx-f80m.onrender.com/api"
