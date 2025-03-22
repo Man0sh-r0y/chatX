@@ -29,6 +29,8 @@ export const useChatStore = create((set, get) => ({
       const res = await axiosInstance(options);
 
       console.log("Token: ", token);
+
+      console.log("Get Users response: ", res);
       
       if(res?.data) {
         set({ users: res.data });
