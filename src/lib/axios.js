@@ -1,7 +1,6 @@
 import axios from "axios";
-import { useAuthStore } from "../store/useAuthStore";
 
-const token = useAuthStore.getState().token;
+const token = JSON.parse(localStorage.getItem("user-token"));
 
 export const axiosInstance = axios.create({
   // baseURL: import.meta.env.MODE === "development" ? "http://localhost:5001/api" : "/api",
