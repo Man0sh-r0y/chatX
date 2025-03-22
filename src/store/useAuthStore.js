@@ -39,11 +39,13 @@ export const useAuthStore = create((set, get) => ({
       toast.success("Account created successfully");
 
       const { token } = res?.data;
+
+      console.log("token: ", token);
       if(token) {
         set({ token });
         localStorage.setItem("user-token", token);
       }
-      
+
       get().connectSocket();
     } catch (error) {
       toast.error(error.response.data.message);
