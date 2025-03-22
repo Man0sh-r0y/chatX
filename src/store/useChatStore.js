@@ -16,6 +16,8 @@ export const useChatStore = create((set, get) => ({
       const res = await axiosInstance.get("/messages/users", {
         Authorization: `Bearer ${token}`,
       });
+
+      console.log("Token: ", token);
       set({ users: res.data });
     } catch (error) {
       toast.error(error.response.data.message);
