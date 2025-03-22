@@ -50,5 +50,5 @@ A feature-rich real-time chat application where users can sign up and log in to 
 6. Open the app in your browser:
 
    ```
-   http://localhost:3000
+   http://localhost:5173
    ```
