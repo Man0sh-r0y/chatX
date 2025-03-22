@@ -21,7 +21,14 @@ export const useAuthStore = create((set, get) => ({
 
   checkAuth: async () => {
     try {
-      const res = await axios.get(`${baseURL}/auth/check`);
+
+      console.log("Base url: " + baseURL);
+      const res = await axios.get(`${baseURL}/auth/check`, {
+        headers: { Authorization: `Bearer ${get().token}` },
+        withCredentials: true
+      });
+
+      console.log("Token: ", res.data.token);
   
       set({ authUser: res.data });
       get().connectSocket();
@@ -43,7 +50,7 @@ export const useAuthStore = create((set, get) => ({
       });
 
       console.log("Response data: ", res);
-      
+
       set({ authUser: res.data });
       toast.success("Account created successfully");
 
