@@ -34,3 +34,4 @@ export const THEMES = [
 ];
 
 export const baseURL = "https://chatx-f80m.onrender.com/api"
+export const socketURL = "https://chatx-f80m.onrender.com"
