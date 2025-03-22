@@ -3,6 +3,7 @@ import { axiosInstance } from "../lib/axios.js";
 import toast from "react-hot-toast";
 import { io } from "socket.io-client";
 import { socketURL } from "../constants/index.js";
+import { baseURL } from "../constants/index.js";
 
 // const BASE_URL = import.meta.env.MODE === "development" ? "http://localhost:5001" : "/";
 // const BASE_URL = "https://chatx-f80m.onrender.com";
@@ -99,7 +100,10 @@ export const useAuthStore = create((set, get) => ({
     set({ isUpdatingProfile: true });
     try {
       console.log("update profile data:", data);
-      const res = await axiosInstance.put("/auth/update-profile", data);
+      //const res = await axiosInstance.put("/auth/update-profile", data);
+      const res = await axios.put(`${baseURL}/auth/update-profile`, data, {
+        headers: { Authorization: `Bearer ${get().token}` }
+      });
       set({ authUser: res.data });
       toast.success("Profile updated successfully");
     } catch (error) {
