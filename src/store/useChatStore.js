@@ -19,7 +19,7 @@ export const useChatStore = create((set, get) => ({
     else console.log("No token found while fetching user details (in frontend)");
 
     options = {
-      method: method,
+      method: "get",
       url: "https://chatx-f80m.onrender.com/api",
       headers: token ? {Authorization: `Bearer ${token}`} : null,
       params: "/messages/users",
