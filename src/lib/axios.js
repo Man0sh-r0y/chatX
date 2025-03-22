@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const token = JSON.parse(localStorage.getItem("user-token"));
+const token = localStorage.getItem("user-token");
 
 console.log("Token in axios: ", token);
 

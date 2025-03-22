@@ -30,7 +30,7 @@ export const useChatStore = create((set, get) => ({
       // const res = await axiosInstance.get("/messages/users");
       const res = await axios.get("https://chatx-f80m.onrender.com/api/messages/users", {
         headers: {
-          Authorization: `Bearer ${useAuthStore.getState().token}`
+          Authorization: `Bearer ${token}`
         }
       })
 
