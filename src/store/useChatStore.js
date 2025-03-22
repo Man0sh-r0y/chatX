@@ -19,12 +19,14 @@ export const useChatStore = create((set, get) => ({
     else console.log("No token found while fetching user details (in frontend)");
 
     options = {
-      baseURL: "https://chatx-f80m.onrender.com/api",
+      method: method,
+      url: "https://chatx-f80m.onrender.com/api",
       headers: token ? {Authorization: `Bearer ${token}`} : null,
+      params: "/messages/users",
     }
 
     try {
-      const res = await axiosInstance.get("/messages/users", options);
+      const res = await axiosInstance(options);
 
       console.log("Token: ", token);
       
