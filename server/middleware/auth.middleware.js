@@ -5,6 +5,9 @@ export const protectRoute = async (req, res, next) => {
   try {
 
     console.log("Req body: ", req.body)
+
+    console.log("Req header: ", req.header("Authorization"))
+    
     const token = req.cookies.jwt || req.header("Authorization").replace("Bearer ", "") || req.body.token;
 
     if (!token) {
