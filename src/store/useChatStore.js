@@ -15,7 +15,7 @@ export const useChatStore = create((set, get) => ({
 
     const token = useAuthStore.getState().token;
 
-    if(token) console.log("token found while fetching user details (in frontend)");
+    if(token) console.log("token found while fetching user details (in frontend): ", token);
     else console.log("No token found while fetching user details (in frontend)");
 
     try {
