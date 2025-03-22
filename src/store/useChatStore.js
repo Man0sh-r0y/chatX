@@ -12,15 +12,25 @@ export const useChatStore = create((set, get) => ({
 
   getUsers: async () => {
     set({ isUsersLoading: true });
+
+    const token = useAuthStore.getState().token;
+
+    if(token) console.log("token found while fetching user details (in frontend)");
+    else console.log("No token found while fetching user details (in frontend)");
+
     try {
       const res = await axiosInstance.get("/messages/users", {
         Authorization: `Bearer ${token}`,
       });
 
       console.log("Token: ", token);
-      set({ users: res.data });
+      
+      if(res?.data) {
+        set({ users: res.data });
+      }
+
     } catch (error) {
-      toast.error(error.response.data.message);
+      toast.error(error?.response?.data?.message);
     } finally {
       set({ isUsersLoading: false });
     }
