@@ -52,8 +52,6 @@ export const login = async (req, res) => {
   try {
     const user = await User.findOne({ email });
 
-    console.log("user found !")
-
     if (!user) {
       return res.status(400).json({ message: "Invalid credentials" });
     }
@@ -63,23 +61,13 @@ export const login = async (req, res) => {
       return res.status(400).json({ message: "Invalid credentials" });
     }
 
-    console.log("Password is correct");
-
-    const token = generateToken(user._id, res);
-
-    console.log("Token generated: ", token)
-
-    user.token = token;
-    req.body.token = token;
-
-    await user.save();
+    generateToken(user._id, res);
 
     res.status(200).json({
       _id: user._id,
       fullName: user.fullName,
       email: user.email,
       profilePic: user.profilePic,
-      token: token
     });
   } catch (error) {
     console.log("Error in login controller", error.message);

@@ -7,7 +7,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: ["https://chatappbymanash.vercel.app"],
+    origin: ["http://localhost:3000"],
   },
 });
 
