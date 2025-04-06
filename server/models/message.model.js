@@ -24,6 +24,8 @@ const messageSchema = new mongoose.Schema(
       type: String,
     },
   },
+  /* The `{ timestamps: true }` option in the Mongoose schema definition is used to automatically add
+  two fields to the documents in the collection: `createdAt` and `updatedAt`. */
   { timestamps: true }
 );
 
