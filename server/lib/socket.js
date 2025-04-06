@@ -34,8 +34,8 @@ io.on("connection", (socket) => { // it runs every time when a new user connects
 
   socket.on("disconnect", () => { // It runs when that user closes the tab, loses internet, or disconnects.
     console.log("A user disconnected", socket.id);
-    delete userSocketMap[userId];
-    io.emit("getOnlineUsers", Object.keys(userSocketMap));
+    delete userSocketMap[userId]; // as the user is not online now
+    io.emit("getOnlineUsers", Object.keys(userSocketMap)); // updating online users
   });
 });
 
