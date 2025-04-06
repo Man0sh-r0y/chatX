@@ -1,8 +1,8 @@
-import { v2 as cloudinary } from "cloudinary";
+import { v2 as cloudinary } from "cloudinary"; // This allows you to access the functionalities provided by the v2 module of the Cloudinary package
 
 import { config } from "dotenv";
 
-config();
+config(); // tp use the configuration from the .env file
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
